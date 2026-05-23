@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react"
 import {
   Menu,
   X,
@@ -7,50 +7,52 @@ import {
   Package,
   Info,
   Phone
-} from 'lucide-react'
+} from "lucide-react"
 
 export default function Navbar() {
-
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const closeMenu = () => setMenuOpen(false)
+  const openMenu = () => setMenuOpen(true)
 
   return (
     <>
-      {/* Premium Top Bar */}
+      {/* TOP NAVBAR */}
       <header className="fixed top-0 left-0 w-full z-50">
-
-        <div className="mx-4 mt-4 bg-white/90 backdrop-blur-2xl border border-[#f3e5d0] rounded-3xl shadow-xl">
+        <div className="mx-4 mt-4 backdrop-blur-xl bg-white/70 border border-[#f3e5d0] rounded-3xl shadow-lg">
 
           <div className="flex items-center justify-between px-5 py-4">
 
-            {/* Brand */}
+            {/* BRAND */}
             <div>
               <h1 className="text-2xl font-black tracking-wide text-[#b8792f]">
                 TAMOOH
               </h1>
-
               <p className="text-[11px] tracking-[3px] text-gray-400 uppercase">
                 Premium Spices
               </p>
             </div>
 
-            {/* Right */}
+            {/* ACTIONS */}
             <div className="flex items-center gap-3">
 
-              {/* Premium Cart */}
-              <button className="relative bg-gradient-to-br from-[#c79243] to-[#9f6a1d] text-white p-3 rounded-2xl shadow-lg active:scale-95 transition">
+              {/* CART - PREMIUM BORDER STYLE */}
+              <button className="relative group p-3 rounded-2xl border border-[#c79243]/40 bg-white/40 backdrop-blur-xl hover:border-[#c79243] transition">
 
-                <ShoppingBag size={20} strokeWidth={2.5} />
+                <ShoppingBag
+                  size={20}
+                  className="text-[#9f6a1d] group-hover:scale-110 transition"
+                />
 
-                {/* Count */}
-                <span className="absolute -top-1 -right-1 bg-black text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                <span className="absolute -top-1 -right-1 bg-[#9f6a1d] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
                   1
                 </span>
               </button>
 
-              {/* Hamburger */}
+              {/* HAMBURGER */}
               <button
-                onClick={() => setMenuOpen(true)}
-                className="bg-black text-white p-3 rounded-2xl shadow-lg active:scale-95 transition"
+                onClick={openMenu}
+                className="p-3 rounded-2xl bg-black text-white shadow-md active:scale-95 transition"
               >
                 <Menu size={22} />
               </button>
@@ -59,124 +61,90 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Spacer */}
-      <div className="h-[110px]"></div>
+      <div className="h-[110px]" />
 
-      {/* Overlay */}
+      {/* OVERLAY */}
       {menuOpen && (
         <div
-          onClick={() => setMenuOpen(false)}
+          onClick={closeMenu}
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
-        ></div>
+        />
       )}
 
-      {/* Premium Sidebar */}
+      {/* SIDEBAR */}
       <div
-        className={`fixed top-0 right-0 h-full w-[85%] max-w-[340px] bg-white z-50 shadow-2xl transition-transform duration-300 ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full w-[85%] max-w-[340px] bg-white z-50 shadow-2xl transform transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
 
-        {/* Sidebar Top */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#d8a04d] to-[#9f6a1d] p-6 text-white">
+        {/* HEADER */}
+        <div className="relative bg-gradient-to-br from-[#d8a04d] to-[#9f6a1d] p-6 text-white">
 
           <div className="flex items-center justify-between">
 
             <div>
-              <h2 className="text-3xl font-black tracking-wide">
+              <h2 className="text-2xl font-black tracking-wide">
                 TAMOOH
               </h2>
-
-              <p className="text-sm text-yellow-100 mt-1">
-                Instant Biriyani Masala
+              <p className="text-xs text-yellow-100 mt-1">
+                Premium Spice Experience
               </p>
             </div>
 
-            {/* Close */}
+            {/* CLOSE BUTTON FIXED */}
             <button
-              onClick={() => setMenuOpen(false)}
-              className="bg-white/20 p-2 rounded-xl backdrop-blur-lg"
+              onClick={closeMenu}
+              className="p-2 rounded-xl bg-white/20 hover:bg-white/30 transition"
             >
-              <X size={22} />
+              <X size={20} />
             </button>
           </div>
 
-          {/* Glow */}
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-yellow-300 opacity-20 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-yellow-300 opacity-20 blur-3xl rounded-full" />
         </div>
 
-        {/* Menu Links */}
-        <nav className="flex flex-col p-6 gap-5">
+        {/* NAV ITEMS (MINIMAL PREMIUM STYLE) */}
+        <nav className="p-6 space-y-4">
 
-          <a
-            href="#home"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-4 bg-[#fff8ea] hover:bg-[#f8ecd4] p-4 rounded-2xl transition"
-          >
-            <Home size={22} className="text-[#b8792f]" />
+          {[
+            { icon: Home, label: "Home", href: "#home" },
+            { icon: Package, label: "Product", href: "#product" },
+            { icon: Info, label: "About", href: "#about" },
+            { icon: Phone, label: "Contact", href: "#contact" }
+          ].map((item, i) => (
+            <a
+              key={i}
+              href={item.href}
+              onClick={closeMenu}
+              className="flex items-center gap-4 p-4 rounded-2xl bg-[#fff8ea] hover:bg-[#f3e3c4] transition group"
+            >
+              <item.icon
+                size={20}
+                className="text-[#b8792f] group-hover:scale-110 transition"
+              />
 
-            <span className="font-semibold text-gray-700">
-              Home
-            </span>
-          </a>
+              {/* TEXT ONLY (clean premium) */}
+              <span className="font-medium text-gray-700">
+                {item.label}
+              </span>
+            </a>
+          ))}
 
-          <a
-            href="#product"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-4 bg-[#fff8ea] hover:bg-[#f8ecd4] p-4 rounded-2xl transition"
-          >
-            <Package size={22} className="text-[#b8792f]" />
-
-            <span className="font-semibold text-gray-700">
-              Product
-            </span>
-          </a>
-
-          <a
-            href="#about"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-4 bg-[#fff8ea] hover:bg-[#f8ecd4] p-4 rounded-2xl transition"
-          >
-            <Info size={22} className="text-[#b8792f]" />
-
-            <span className="font-semibold text-gray-700">
-              About
-            </span>
-          </a>
-
-          <a
-            href="#contact"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-4 bg-[#fff8ea] hover:bg-[#f8ecd4] p-4 rounded-2xl transition"
-          >
-            <Phone size={22} className="text-[#b8792f]" />
-
-            <span className="font-semibold text-gray-700">
-              Contact
-            </span>
-          </a>
-
-          {/* Premium Cart */}
-          <button className="mt-4 bg-gradient-to-r from-[#c79243] to-[#9f6a1d] text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-lg active:scale-95 transition">
-
-            <ShoppingBag size={22} />
-
-            <span className="font-semibold text-lg">
-              Cart (1)
-            </span>
+          {/* PREMIUM CART BUTTON */}
+          <button className="mt-6 w-full bg-gradient-to-r from-[#c79243] to-[#9f6a1d] text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-lg active:scale-95">
+            <ShoppingBag size={20} />
+            <span className="font-semibold">Cart (1)</span>
           </button>
         </nav>
 
-        {/* Bottom */}
+        {/* FOOTER */}
         <div className="absolute bottom-5 left-0 w-full px-6">
-
           <div className="bg-[#fff8ea] rounded-2xl p-4 text-center">
-
-            <p className="text-sm text-gray-500">
+            <p className="text-xs text-gray-500">
               Premium Spice Experience
             </p>
-
-            <h3 className="text-[#b8792f] font-bold text-lg mt-1">
+            <h3 className="text-[#b8792f] font-bold mt-1">
               Tamooh Spices
             </h3>
           </div>
@@ -184,4 +152,4 @@ export default function Navbar() {
       </div>
     </>
   )
-}
+      }
