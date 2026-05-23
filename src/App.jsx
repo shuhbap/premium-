@@ -1,13 +1,25 @@
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Home from './pages/Home'
+import {
+  Routes,
+  Route
+} from "react-router-dom"
+
+import Home from "./pages/Home"
+import Cart from "./pages/Cart"
 
 export default function App() {
   return (
-    <>
-      <Navbar />
-      <Home />
-      <Footer />
-    </>
+    <Routes>
+
+      <Route
+        path="/"
+        element={<Home />}
+      />
+
+      <Route
+        path="/cart"
+        element={<Cart />}
+      />
+
+    </Routes>
   )
 }
