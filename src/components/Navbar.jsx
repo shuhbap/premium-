@@ -24,7 +24,7 @@ export default function Navbar() {
 
               {/* LOGO IMAGE */}
               <img
-                src="/mnt/data/file_000000008ec871f89acf59ff0ab3900d"
+                src="/images/logo.jpg" alt="logo" />
                 alt="Tamooh Logo"
                 className="w-10 h-10 object-contain rounded-xl"
               />
